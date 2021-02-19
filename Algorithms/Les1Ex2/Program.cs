@@ -8,6 +8,8 @@ namespace Les1Ex2
 {
     class Program
     {
+        //Ронжин Л.
+        //Вычислите асимптотическую сложность функции из примера ниже
         static void Main(string[] args)
         {
 
