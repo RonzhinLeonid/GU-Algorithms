@@ -15,12 +15,12 @@ namespace Les1Ex3
             int[] N = new int[]         { -5,           0, 1, 5, 11, 25}; //массив исходных данных
             int[] expFibRec = new int[] { int.MinValue, 0, 1, 5, 89, 75025}; //массив ожидаемых значений по алгоритму из методички
             int[] expFibFor = new int[] { int.MinValue, 0, 1, 5, 89, 75025 }; //массив ожидаемых значений по доработанному алгоритму
-            Console.WriteLine($"Число |Рез-т рекурс ф-ции|Рез. теста|Рез-т ф-ции с циклом|Рез. теста");
+            Console.WriteLine($"Число |Рез-т рекурс ф-ции| Ожид. рез-т |Рез. теста|Рез-т ф-ции с циклом| Ожид. рез-т |Рез. теста");
             for (int i = 0; i < N.Length; i++)
             {
                 bool resultFibRec = expFibRec[i] == GetNumberFibRec(N[i]);
                 bool resultFibFor = expFibFor[i] == GetNumberFibFor(N[i]);
-                Console.WriteLine($"{N[i],5} | {GetNumberFibRec(N[i]),16} | {resultFibRec,8} | {GetNumberFibFor(N[i]),18} | {resultFibFor,8}");
+                Console.WriteLine($"{N[i],5} | {GetNumberFibRec(N[i]),16} | {expFibRec[i],11} | {resultFibRec,8} | {GetNumberFibFor(N[i]),18} | {expFibFor[i],11} | {resultFibFor,8}");
             }
             Console.ReadKey();
         }
