@@ -15,12 +15,12 @@ namespace Les1Ex1
             int[] N            = new int[] { -1,           0,            1,             5,        11,        25,           100,          127 }; //массив исходных данных
             string[] exp    = new string[] { "Простое",    "Простое",    "Простое",    "Простое", "Простое", "Не простое", "Не простое", "Простое" }; //массив ожидаемых значений по алгоритму из методички
             string[] expUpd = new string[] { "Не простое", "Не простое", "Не простое", "Простое", "Простое", "Не простое", "Не простое", "Простое" }; //массив ожидаемых значений по доработанному алгоритму
-            Console.WriteLine($"Число |Рез-т ф-ции из алг|Рез. теста|Рез-т дораб ф-ции|Рез. теста");
+            Console.WriteLine($"Число |Рез-т ф-ции из алг| Ожид. рез-т|Рез. теста|Рез-т дораб ф-ции| Ожид. рез-т|Рез. теста");
             for (int i = 0; i < N.Length; i++)
             {
                 bool result = exp[i] == CheckPrimeNumber(N[i]);
                 bool resultUpd = expUpd[i] == CheckPrimeNumberUpd(N[i]);
-                Console.WriteLine($"{N[i],5} | {CheckPrimeNumber(N[i]),16} | {result,8} | {CheckPrimeNumberUpd(N[i]),15} | {resultUpd,8}");
+                Console.WriteLine($"{N[i],5} | {CheckPrimeNumber(N[i]),16} | {exp[i],10} | {result,8} | {CheckPrimeNumberUpd(N[i]),15} | {expUpd[i],10} | {resultUpd,8}");
             }
             Console.ReadKey();
         }
