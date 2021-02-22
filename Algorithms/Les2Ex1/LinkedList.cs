@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Les2Ex1
 {
-    class LinkedList : ILinkedList
+    public class LinkedList : ILinkedList
     {
         private Node startNode;
         private Node endNode;
@@ -17,6 +17,17 @@ namespace Les2Ex1
             endNode = null;
         }
 
+        public LinkedList(int[] inputArray)
+        {
+            startNode = null;
+            endNode = null;
+            if (inputArray == null)
+                throw new NullReferenceException("Массив не задан");
+            foreach (var item in inputArray)
+            {
+                AddNode(item);
+            }
+        } 
         /// <summary>
         /// добавляет новый элемент в конец списка
         /// </summary>
@@ -47,6 +58,11 @@ namespace Les2Ex1
         /// <param name="value"></param>
         public void AddNodeAfter(Node node, int value)
         {
+            if (node == null)
+            {
+                AddNode(value);
+                return;
+            }
             Node newNode = new Node { Value = value };
             Node nextItem = node.NextNode; // запоминаем следующий элемент в списке за указанным.
             node.NextNode = newNode; // в текущем заменяем ссылку на следующий на новый элемент
@@ -131,6 +147,7 @@ namespace Les2Ex1
         /// <param name="node"></param>
         public void RemoveNode(Node node)
         {
+            if  (node == null) return;
             if (node == endNode)
             {
                 endNode = node.PrevNode;
@@ -148,6 +165,16 @@ namespace Les2Ex1
             prevItem.NextNode = nextItem;
             nextItem.PrevNode = prevItem;
         }
-
+        public override string ToString()
+        {
+            var startNodeOne = startNode;
+            string str = "";
+            while (startNodeOne != null)
+            {
+                str += startNodeOne.Value + " ";
+                startNodeOne = startNodeOne.NextNode;
+            }
+            return str.Trim(' ');
+        }
     }
 }
