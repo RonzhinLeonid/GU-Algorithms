@@ -36,6 +36,7 @@ namespace Les2Ex1Test.Test
 
             root.AddNode(value);
             Assert.AreEqual(expected.ToString(), root.ToString());
+            //Assert.AreEqual(expected, root);
         }
 
         [TestMethod]

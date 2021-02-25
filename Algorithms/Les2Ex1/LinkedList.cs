@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Les2Ex1
 {
-    public class LinkedList : ILinkedList
+    public class LinkedList : ILinkedList, IEnumerable
     {
         private Node startNode;
         private Node endNode;
@@ -108,7 +109,8 @@ namespace Les2Ex1
             }
             return count;
         }
-        /// <summary>
+
+                /// <summary>
         /// удаляет элемент по порядковому номеру
         /// </summary>
         /// <param name="index"></param>
@@ -164,6 +166,15 @@ namespace Les2Ex1
             var nextItem = node.NextNode;
             prevItem.NextNode = nextItem;
             nextItem.PrevNode = prevItem;
+        }
+        public IEnumerator GetEnumerator()
+        {
+            Node current = startNode;
+            while (current != null)
+            {
+                yield return current.Value;
+                current = current.NextNode;
+            }
         }
         public override string ToString()
         {
