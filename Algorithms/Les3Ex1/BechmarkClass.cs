@@ -7,7 +7,7 @@ namespace Les3Ex1
 {
     public class BechmarkClass
     {
-        public static int n = 1;
+        public static int n = 1000;
         public static PointClass[] pointsClassFirst = new PointClass[n];
         public static PointClass[] pointsClassSecond = new PointClass[n];
 
