@@ -33,7 +33,12 @@ namespace Les4Ex1
             }
             return rndStr.ToString();
         }
-
+        /// <summary>
+        /// Поиск перебором по массиву
+        /// </summary>
+        /// <param name="stringArray"></param>
+        /// <param name="str"></param>
+        /// <returns></returns>
         public static bool ContainsString(string[] stringArray, string str)
         {
             foreach (var item in stringArray)
