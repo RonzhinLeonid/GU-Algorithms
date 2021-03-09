@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Les4Ex2
 {
-    class TreeHelper
+    public static class TreeHelper
     {
-        public static NodeInfo[] GetTreeInLine(ITree tree)
+        public static NodeInfo[] GetTreeInLine(TreeNode head)
         {
             var bufer = new Queue<NodeInfo>();
             var returnArray = new List<NodeInfo>();
-            var root = new NodeInfo() { Node = tree.GetRoot() };
+            var root = new NodeInfo() { Node = head };
             bufer.Enqueue(root);
 
             while (bufer.Count != 0)

@@ -20,7 +20,7 @@ namespace Les4Ex1
                 stringArray[i] = GetRandomString();
                 hashSet.Add(GetRandomString());
             }
-            rndString = GetRandomString();
+            rndString = stringArray[rnd.Next(stringArray.Length-1)];
         }
 
         public static string GetRandomString()
