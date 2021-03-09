@@ -147,7 +147,7 @@ namespace Les4Ex2
             Console.Write(qqq[0].Node.Value);
             for (int i = 1; i < qqq.Length; i++)
             {
-                if (qqq[i-1].Depth == qqq[i].Depth)
+                if (qqq[i-1].Depth == qqq[i].Depth)  
                     Console.Write(" " + qqq[i].Node.Value);
                 else
                 {
