@@ -8,24 +8,24 @@ namespace Les4Ex2
 {
     class BinaryTreeSearch : ITree
     {
-        private TreeNode _head;
+        private TreeNode _root;
 
-        public static TreeNode Tree(int n)
-        {
-            TreeNode newNode = null;
-            if (n == 0)
-                return null;
-            else
-            {
-                var nl = n / 2;
-                var nr = n - nl - 1;
-                newNode = new TreeNode();
-                newNode.Value = new Random().Next(1000);
-                newNode.LeftChild = Tree(nl);
-                newNode.RightChild = Tree(nr);
-            }
-            return newNode;
-        }
+        //public static TreeNode Tree(int n)
+        //{
+        //    TreeNode newNode = null;
+        //    if (n == 0)
+        //        return null;
+        //    else
+        //    {
+        //        var nl = n / 2;
+        //        var nr = n - nl - 1;
+        //        newNode = new TreeNode();
+        //        newNode.Value = new Random().Next(1000);
+        //        newNode.LeftChild = Tree(nl);
+        //        newNode.RightChild = Tree(nr);
+        //    }
+        //    return newNode;
+        //}
 
         private TreeNode GetFreeNode(int value)
         {
@@ -41,12 +41,12 @@ namespace Les4Ex2
         public void AddItem(int value)
         {
             TreeNode node = null;
-            if (_head == null)
+            if (_root == null)
             {
-                _head = GetFreeNode(value);
+                _root = GetFreeNode(value);
                 return;
             }
-            node = _head;
+            node = _root;
             while (node != null)
             {
                 if (value > node.Value)
@@ -88,8 +88,8 @@ namespace Les4Ex2
         /// <returns></returns>
         public TreeNode GetNodeByValue(int value)
         {
-            if (_head == null) return null;
-            var node = _head;
+            if (_root == null) return null;
+            var node = _root;
             while (node != null)
             {
                 if (node.Value == value)
@@ -109,8 +109,8 @@ namespace Les4Ex2
         public TreeNode GetNodeByValueWithParent(int value, out TreeNode parent)
         {
             parent = null;
-            if (_head == null) return null;
-            var node = _head;
+            if (_root == null) return null;
+            var node = _root;
             while (node != null)
             {
                 if (node.Value == value)
@@ -134,29 +134,75 @@ namespace Les4Ex2
         /// <returns></returns>
         public TreeNode GetRoot()
         {
-            if (_head ==  null) return null;
-            return _head;
+            if (_root ==  null) return null;
+            return _root;
         }
-
+        /// <summary>
+        /// Вспомогательный метод получения горизонтального разделителя.
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public string GetSpacing(int n)
+        {
+            string str = "";
+            if (n <= 0) return str;
+            //else if (n < 0) throw new Exception("Неверное значение");
+            else
+                for (int i = 0; i < n; i++)
+                    str += "_";
+            return str;
+        }
+        /// <summary>
+        /// Печать узла дерева по координатам
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="spac"></param>
+        /// <returns></returns>
+        public int _PrintTree(TreeNode node, int x, int y, int spac)
+        {
+            Console.SetCursorPosition(x, y);
+            Console.Write(node.Value);
+            var sp = spac;
+            var loc = y;
+            if (node.RightChild != null)
+            {
+                while (loc <= y)
+                {
+                    Console.SetCursorPosition(x + 2, y + 1);
+                    Console.Write("\\" + GetSpacing(spac));
+                    loc++;
+                }
+                y = _PrintTree(node.RightChild, x + 4 + spac, y + 2, sp/3);
+            }
+            sp = spac;
+            loc = y;
+            if (node.LeftChild != null)
+            {
+                while (loc <= y)
+                {
+                    Console.SetCursorPosition(x-2 - spac, loc + 1);
+                    Console.Write(GetSpacing(spac) + "/");
+                    loc++;
+                }
+                y = _PrintTree(node.LeftChild, x-4 - spac, y + 2, sp/3);
+            }
+            
+            return y-2;
+        }
+        /// <summary>
+        /// Вывод дерева в консоль
+        /// </summary>
         public void PrintTree()
         {
-            if (_head == null) return;
+            if (_root == null) return;
+            var TreeArray = TreeHelper.GetTreeInLine(_root);
 
-            var t = Console.CursorTop;
-            var qqq = TreeHelper.GetTreeInLine(_head);
-            Console.Write(qqq[0].Node.Value);
-            for (int i = 1; i < qqq.Length; i++)
-            {
-                if (qqq[i-1].Depth == qqq[i].Depth)
-                    Console.Write(" " + qqq[i].Node.Value);
-                else
-                {
-                    Console.WriteLine();
-                    Console.Write(qqq[i].Node.Value);
-                }
-
-            }
-            //throw new NotImplementedException();
+            var spacing = TreeArray[TreeArray.Length - 1].Depth - 1;
+            var cursorPositionX = (int)Math.Pow(2,TreeArray[TreeArray.Length - 1].Depth) * 6/2;
+            var cursorPositionY = Console.CursorTop+2;
+            _PrintTree(_root, cursorPositionX, cursorPositionY, 18);
         }
         /// <summary>
         /// Удалить узел по значению
@@ -175,7 +221,7 @@ namespace Les4Ex2
             if (node.RightChild == null)
             {
                 if (parent == null)
-                    _head = node.LeftChild;
+                    _root = node.LeftChild;
                 else
                 {
                     if (parent.Value > value)
@@ -189,7 +235,7 @@ namespace Les4Ex2
             {
                 node.RightChild.LeftChild = node.LeftChild;
                 if (parent == null)
-                    _head = node.RightChild;
+                    _root = node.RightChild;
                 else 
                 {
                     if (parent.Value > value)
@@ -208,11 +254,11 @@ namespace Les4Ex2
                     leftParent = leftNode;
                     leftNode = leftNode.LeftChild;
                 }
-                leftParent.LeftChild = leftParent.RightChild;
+                leftParent.LeftChild = leftNode.RightChild;
                 leftNode.LeftChild = node.LeftChild;
                 leftNode.RightChild = node.RightChild;
                 if (parent==null)
-                    _head = leftNode;
+                    _root = leftNode;
                 else
                 {
                     if (parent.Value > value)
