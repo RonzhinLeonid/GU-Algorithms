@@ -6,28 +6,21 @@ using System.Threading.Tasks;
 
 namespace Les4Ex2
 {
-    class BinaryTreeSearch : ITree
+    public class BinaryTreeSearch : ITree
     {
         private TreeNode _root;
+        public BinaryTreeSearch(int[] array)
+        {
+            foreach (var item in array)
+            {
+                AddItem(item);
+            }
+        }
+        public BinaryTreeSearch()
+        {
+        }
 
-        //public static TreeNode Tree(int n)
-        //{
-        //    TreeNode newNode = null;
-        //    if (n == 0)
-        //        return null;
-        //    else
-        //    {
-        //        var nl = n / 2;
-        //        var nr = n - nl - 1;
-        //        newNode = new TreeNode();
-        //        newNode.Value = new Random().Next(1000);
-        //        newNode.LeftChild = Tree(nl);
-        //        newNode.RightChild = Tree(nr);
-        //    }
-        //    return newNode;
-        //}
-
-        private TreeNode GetFreeNode(int value)
+        public static TreeNode GetFreeNode(int value)
         {
             return new TreeNode
             {
@@ -102,7 +95,7 @@ namespace Les4Ex2
             return null;
         }
         /// <summary>
-        /// Поиск узла по его значению
+        /// Поиск узла по его значению с выводом родителя
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
@@ -142,11 +135,11 @@ namespace Les4Ex2
         /// </summary>
         /// <param name="n"></param>
         /// <returns></returns>
-        public string GetSpacing(int n)
+        public static string GetSpacing(int n)
         {
             string str = "";
-            if (n <= 0) return str;
-            //else if (n < 0) throw new Exception("Неверное значение");
+            if (n == 0) return str;
+            else if (n < 0) throw new Exception("Неверное значение");
             else
                 for (int i = 0; i < n; i++)
                     str += "_";
@@ -200,7 +193,7 @@ namespace Les4Ex2
             var TreeArray = TreeHelper.GetTreeInLine(_root);
 
             var spacing = TreeArray[TreeArray.Length - 1].Depth - 1;
-            var cursorPositionX = (int)Math.Pow(2,TreeArray[TreeArray.Length - 1].Depth) * 6/2;
+            var cursorPositionX = (int)Math.Pow(2,TreeArray[TreeArray.Length - 1].Depth) * 4;
             var cursorPositionY = Console.CursorTop+2;
             _PrintTree(_root, cursorPositionX, cursorPositionY, 18);
         }
