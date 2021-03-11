@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Linq;
 
 namespace Les4Ex2.Test
 {
@@ -71,18 +72,51 @@ namespace Les4Ex2.Test
         [TestMethod]
         public void TestAddItem()
         {
-            var expected = TreeHelper.GetTreeInLine(new BinaryTreeSearch(new int[] { 8, 4, 10, 1, 3, 5}));
+            var expected = true;
 
-            var tree = new BinaryTreeSearch();
-            tree.AddItem(8);
-            tree.AddItem(4);
-            tree.AddItem(10);
-            tree.AddItem(1);
-            tree.AddItem(3);
-            tree.AddItem(5);
-            var actual = TreeHelper.GetTreeInLine(tree);
+            var expectedTree = new BinaryTreeSearch(new int[] { 8, 4, 10, 1, 3, 5});
+            var expectedList = expectedTree.GetTuple();
+
+            var actualTree = new BinaryTreeSearch();
+            actualTree.AddItem(8);
+            actualTree.AddItem(4);
+            actualTree.AddItem(10);
+            actualTree.AddItem(1);
+            actualTree.AddItem(3);
+            actualTree.AddItem(5);
+            var actualList = actualTree.GetTuple();
+            var actual = actualList.SequenceEqual(expectedList);
             Assert.AreEqual(expected, actual);
         }
-        
+        [TestMethod]
+        public void TestRemoveItem_10()
+        {
+            var expected = true;
+
+            var expectedTree = new BinaryTreeSearch(new int[] { 8, 4, 1, 3, 5 });
+            var expectedList = expectedTree.GetTuple();
+
+            var actualTree = new BinaryTreeSearch(new int[] { 8, 4, 10, 1, 3, 5 });
+            actualTree.RemoveItem(10);
+            var actualList = actualTree.GetTuple();
+
+            var actual = actualList.SequenceEqual(expectedList);
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void TestRemoveItem_100()
+        {
+            var expected = true;
+
+            var expectedTree = new BinaryTreeSearch(new int[] { 8, 4, 1, 3, 5 });
+            var expectedList = expectedTree.GetTuple();
+
+            var actualTree = new BinaryTreeSearch(new int[] { 8, 4, 1, 3, 5 });
+            actualTree.RemoveItem(100);
+            var actualList = actualTree.GetTuple();
+
+            var actual = actualList.SequenceEqual(expectedList);
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

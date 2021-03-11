@@ -261,22 +261,44 @@ namespace Les4Ex2
                 }
             }
         }
-        //public override bool Equals(object obj)
-        //{
-        //    var tree = obj as BinaryTreeSearch;
-
-        //    if (tree == null)
-        //        return false;
-
-        //    return (tree._root == _root);
-        //}
-        public static Boolean operator ==(BinaryTreeSearch treeOne, BinaryTreeSearch treeTwo)
+        
+        public List<Tuple<int, int>> GetTuple()
         {
-            return object.Equals(treeOne, treeTwo);
+            var binaryArray = TreeHelper.GetTreeInLine(_root);
+            var validate = new Tuple<int, int>[binaryArray.Length]; // кортеж дя проверки
+
+            for (int i = 0; i < binaryArray.Length; i++)
+            {
+                int depth = binaryArray[i].Depth;
+                int value = binaryArray[i].Node.Value;
+                validate[i] = new Tuple<int, int>(value, depth);
+                validate.ToArray();
+            }
+            var list = new List<Tuple<int, int>>();
+            foreach (var item in validate)
+            {
+                list.Add(item);
+            }
+            return list;
         }
-        public static Boolean operator !=(BinaryTreeSearch treeOne, BinaryTreeSearch treeTwo)
+        public override bool Equals(object obj)
         {
-            return !object.Equals(treeOne, treeTwo);
+            var tree = obj as BinaryTreeSearch;
+
+            if (tree == null)
+                return false;
+            var treeArray = TreeHelper.GetTreeInLine(tree.GetRoot());
+            var array = TreeHelper.GetTreeInLine(_root);
+
+            if (treeArray.Length != array.Length)
+                return false;
+
+            for (int i = 0; i < treeArray.Length; i++)
+            {
+                if (treeArray[i].Depth != array[i].Depth || treeArray[i].Node != array[i].Node)
+                    return false;
+            }
+            return true;
         }
 
     }
