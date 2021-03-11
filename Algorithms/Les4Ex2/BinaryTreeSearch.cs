@@ -261,6 +261,24 @@ namespace Les4Ex2
                 }
             }
         }
+        //public override bool Equals(object obj)
+        //{
+        //    var tree = obj as BinaryTreeSearch;
+
+        //    if (tree == null)
+        //        return false;
+
+        //    return (tree._root == _root);
+        //}
+        public static Boolean operator ==(BinaryTreeSearch treeOne, BinaryTreeSearch treeTwo)
+        {
+            return object.Equals(treeOne, treeTwo);
+        }
+        public static Boolean operator !=(BinaryTreeSearch treeOne, BinaryTreeSearch treeTwo)
+        {
+            return !object.Equals(treeOne, treeTwo);
+        }
+
     }
 }
 

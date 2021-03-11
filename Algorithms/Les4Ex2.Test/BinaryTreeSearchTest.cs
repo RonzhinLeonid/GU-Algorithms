@@ -71,15 +71,16 @@ namespace Les4Ex2.Test
         [TestMethod]
         public void TestAddItem()
         {
-            var expected = new BinaryTreeSearch(new int[] { 8, 4, 10, 1, 3, 5});
+            var expected = TreeHelper.GetTreeInLine(new BinaryTreeSearch(new int[] { 8, 4, 10, 1, 3, 5}));
 
-            var actual = new BinaryTreeSearch();
-            actual.AddItem(8);
-            actual.AddItem(4);
-            actual.AddItem(10);
-            actual.AddItem(1);
-            actual.AddItem(3);
-            actual.AddItem(5);
+            var tree = new BinaryTreeSearch();
+            tree.AddItem(8);
+            tree.AddItem(4);
+            tree.AddItem(10);
+            tree.AddItem(1);
+            tree.AddItem(3);
+            tree.AddItem(5);
+            var actual = TreeHelper.GetTreeInLine(tree);
             Assert.AreEqual(expected, actual);
         }
         
