@@ -12,6 +12,16 @@ namespace Les5
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Первое дерево");
+            var tree1 = new BinaryTreeSearch();
+            tree1.PrintTree();
+            Console.WriteLine();
+            Console.WriteLine("Обход дерева в глубину");
+            BFSAndDFSTree.DFS(tree1);
+            Console.WriteLine();
+            Console.WriteLine("Обход дерева в ширину");
+            BFSAndDFSTree.BFS(tree1);
+            Console.WriteLine("\nВторое дерево");
             var tree2 = new BinaryTreeSearch(new int[] {20, 30, 10, 5, 9, 1, 22, 15, 16, 13, 25, 0 });
             tree2.PrintTree();
             Console.WriteLine();
@@ -23,6 +33,15 @@ namespace Les5
             Console.ReadKey();
         }
         /*
+        Первое дерево
+        Обход дерева в глубину
+        Дерево пустое
+
+        Обход дерева в ширину
+        Дерево пустое
+
+        Второе дерево
+       
                                                                         20
                                             __________________/   \__________________
                                           10                                          30
