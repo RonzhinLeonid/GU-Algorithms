@@ -54,7 +54,6 @@ namespace Les7
         {
             int n = map.GetLength(0);
             int m = map.GetLength(1);
-
             int[,] arr = new int[n, m];
             //Заполнение 1й строки
             for (int i = 0; i < m; i++)
@@ -78,8 +77,7 @@ namespace Les7
                     break;
                 }
             }
-
-
+            //Заполнение оставшейся матрицы
             for (int i = 1; i < n; i++)
             {
                 for (int j = 1; j < m; j++)
@@ -105,7 +103,6 @@ namespace Les7
                 }
                 Console.WriteLine();
             }
-
         }
     }
 }
