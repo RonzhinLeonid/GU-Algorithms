@@ -183,7 +183,7 @@ namespace LibrarySort
             fs.Close();
         }
         /// <summary>
-        /// Получить минимальное значение из массива
+        /// Получить минимальное значение из массива и его индекс
         /// </summary>
         /// <param name="tempArr">массив</param>
         /// <param name="index">индекс</param>
