@@ -73,16 +73,19 @@ namespace LibrarySort
             while (fileStream.Read(buffer, 0, size) > 0)
             {
                 string tempFileName = $"temp{count++}.txt";
-                CreateFile(tempFileName, buffer);
+                //Перегонка в список и обратно в массив для встроеннной сортировки
+                var temp = buffer.ToList();
+                temp.Sort();
+                CreateFile(tempFileName, temp.ToArray());
                 liseTempFile.Add(tempFileName);
             }
 
-            foreach (var item in liseTempFile)
-            {
-                var temp = ReadFile(item);
-                temp.Sort();
-                WriteFile(item, temp);
-            }
+            //foreach (var item in liseTempFile)
+            //{
+            //    var temp = ReadFile(item);
+            //    temp.Sort();
+            //    WriteFile(item, temp);
+            //}
             Merge(liseTempFile, fileSort);
             CleanAfterWork(liseTempFile);
         }
